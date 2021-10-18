@@ -4,16 +4,14 @@ package tutorial;
 import "google/protobuf/timestamp.proto";
 
 
-option go_package = "github.com/protocolbuffers/protobuf/examples/go/tutorialpb";
+option go_package = "echo/server";
 
 message echo {
   string 			msg = 1;
-  google.protobuf.Timestamp	last_updated = 2;
 }
 
 message echo_many {
   string			msg = 1;
   int32				repeat = 2;
-  google.protobuf.Timestamp	last_updated = 3;
 }
 
