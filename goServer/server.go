@@ -1,15 +1,15 @@
 package main
 
 import (
-    //"context"
+    "context"
     "fmt"
     "log"
     "net"
-	//"net/http"
+    "strings"
 
     // This import path is based on the name declaration in the go.mod,
     // and the gen/proto/go output location in the buf.gen.yaml.
-	echov1 "echoapis/echo/v1/gen/proto/go/echo/v1"
+	v1 "echoapis/echo/v1/gen/proto/go/echo/v1"
 	"google.golang.org/grpc"
 )
 
@@ -29,7 +29,7 @@ func run() error {
     }
 
     server := grpc.NewServer()
-    echov1.RegisterEchoServiceServer(server, &echoServiceServer{})
+    v1.RegisterEchoServiceServer(server, &echoServiceServer{})
     log.Println("Listening on", listenOn)
     if err := server.Serve(listener); err != nil {
         return fmt.Errorf("failed to serve gRPC server: %w", err)
@@ -40,10 +40,17 @@ func run() error {
 
 // echoServiceServer implements the EchoServiceServer API.
 type echoServiceServer struct {
-    echov1.UnimplementedEchoServiceServer
+    v1.UnimplementedEchoServiceServer
 }
 
-/*func main() {
-    http.HandleFunc("/", HelloServer)
-    http.ListenAndServe(":8080", nil)
-}*/
+func (s echoServiceServer) Echo(ctx context.Context, in *v1.EchoRequest) (*v1.EchoResponse, error) {
+    echoMessage := fmt.Sprintf("%s%s", in.GetMsg(), in.GetMsg())
+
+    return &v1.EchoResponse{Msg: echoMessage}, nil
+}
+
+func (s echoServiceServer) EchoMany(ctx context.Context,in *v1.EchoManyRequest) (*v1.EchoManyResponse, error) {
+    echoMessage := fmt.Sprintf("%s", strings.Repeat(in.GetMsg(), int(in.GetRepeat())))
+
+    return &v1.EchoManyResponse{Msg: echoMessage}, nil
+}
