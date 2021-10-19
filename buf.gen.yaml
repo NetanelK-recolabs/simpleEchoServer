@@ -1,5 +1,7 @@
 version: v1
 plugins:
+  - name: python
+    out: gen/proto/python
   - name: go
     out: gen/proto/go
     opt: paths=source_relative
