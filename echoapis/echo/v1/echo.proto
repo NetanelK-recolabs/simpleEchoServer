@@ -1,17 +1,28 @@
 syntax = "proto3";
-package tutorial;
-
-import "google/protobuf/timestamp.proto";
+package echoserver;
 
 
 option go_package = "echo/server";
 
-message echo {
+message echoRequest {
   string 			msg = 1;
 }
 
-message echo_many {
+message echoManyRequest {
   string			msg = 1;
   int32				repeat = 2;
+}
+
+message echoResponse {
+  string 			msg = 1;
+}
+
+message echoManyResponse {
+  string 			msg = 1;
+}
+
+service EchoService {
+rpc Echo(echoRequest) returns (echoResponse) {}
+rpc EchoMany(echoManyRequest) returns (echoManyResponse) {}
 }
 
