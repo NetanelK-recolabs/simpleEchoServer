@@ -1,28 +1,28 @@
 syntax = "proto3";
-package echoserver;
+package echoapis.echo.v1;
 
 
 option go_package = "echo/server";
 
-message echoRequest {
+message EchoRequest {
   string 			msg = 1;
 }
 
-message echoManyRequest {
+message EchoManyRequest {
   string			msg = 1;
   int32				repeat = 2;
 }
 
-message echoResponse {
+message EchoResponse {
   string 			msg = 1;
 }
 
-message echoManyResponse {
+message EchoManyResponse {
   string 			msg = 1;
 }
 
 service EchoService {
-rpc Echo(echoRequest) returns (echoResponse) {}
-rpc EchoMany(echoManyRequest) returns (echoManyResponse) {}
+rpc Echo(EchoRequest) returns (EchoResponse) {}
+rpc EchoMany(EchoManyRequest) returns (EchoManyResponse) {}
 }
 
