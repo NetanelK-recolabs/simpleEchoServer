@@ -1,6 +1,6 @@
 version: v1
 plugins:
-  - name: python
+  - name: python_betterproto
     out: gen/proto/python
   - name: go
     out: gen/proto/go

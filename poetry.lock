@@ -203,7 +203,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f896d73ae04bba50375cd82fe7d09cd58877aaaf6ad52a892915308510e45e05"
+content-hash = "d6f4fe4aa536437dd9437908aa038565db90e8cd798ac9958fec8c5eb14e4b7b"
 
 [metadata.files]
 betterproto = [
